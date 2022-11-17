@@ -1,0 +1,61 @@
+resource "aws_instance" "ec2instance" {
+  ami             = var.ami
+  instance_type   = var.type
+  key_name        = var.key
+  security_groups = [var.group]
+  tags = {
+    Name = "ec2 instance by terraform"
+  }
+}
+
+resource "aws_key_pair" "keypairs" {
+  key_name   = "keypairs"
+  public_key = tls_private_key.rsa.public_key_openssh
+}
+resource "tls_private_key" "rsa" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+resource "local_file" "keypairs" {
+  content  = tls_private_key.rsa.private_key_pem
+  filename = "keypairs"
+}
+resource "aws_security_group" "testsecurity" {
+  description = "security group script"
+  name        = var.security
+  vpc_id      = var.vpc
+
+
+
+  ingress {
+    description = "ssh"
+    from_port   = 22
+    to_port     = 22
+    protocol    = var.proto
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    description = "ssh"
+    from_port   = 22
+    to_port     = 22
+    protocol    = var.proto
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "aws_s3_bucket" "test" {
+  bucket = "loibra"
+  tags = {
+    Name = "My bucket"
+    acl  = "private"
+  }
+}
+
+resource "aws_iam_user" "iamuser" {
+  name = "user1"
+}
+
+resource "aws_iam_user_policy_attachment" "policy" {
+  user       = aws_iam_user.iamuser.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
+}

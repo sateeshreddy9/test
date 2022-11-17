@@ -1,0 +1,4 @@
+variable "users" {
+    type = list(string)
+    default = ["puppy","r15","billuthedog waste dog"]
+}

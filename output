@@ -1,0 +1,32 @@
+output "aws_public_ip"{
+    description = "public IP"
+    value = "${aws_instance.ec2instance.public_ip}"
+}
+
+
+
+output "aws_private_ip"{
+    description = "private   IP"
+    value = "${aws_instance.ec2instance.private_ip}"
+}
+
+
+
+output "aws_key_name"{
+    description = "key pair"
+    value = "${aws_instance.ec2instance.key_name}"
+}
+
+
+
+output "aws_security_groups"{
+    description = "security group"
+    value = "${aws_instance.ec2instance.security_groups}"
+}
+
+
+
+output "aws_vpc_security_group_ids"{
+    description = "vpc"
+    value = "${aws_instance.ec2instance.vpc_security_group_ids}"
+}

@@ -1,0 +1,22 @@
+resource "aws_security_group" "sateeshsecurity"{
+    description = "security group script"
+    name = "sateeshsecurity"
+    vpc_id = aws_vpc.aws_vpc.id
+
+
+
+   ingress {
+        description = "ssh"
+        from_port = 22
+        to_port = 22
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    egress {
+        description = "ssh"
+        from_port = 22
+        to_port = 22
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+}

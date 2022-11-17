@@ -1,0 +1,23 @@
+main.tf
+resource "aws_iam_user" "iamuser" {
+  name = var.name
+}
+
+resource "aws_iam_user_policy_attachment" "policy" {
+  user       = aws_iam_user.iamuser.name
+  policy_arn = var.policy
+}
+
+var.tf
+variable "name" {
+  description = "name"
+  default     = "testuser"
+}
+
+variable "policy" {
+  description = "iam policy"
+  default     = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
+}
+
+
+

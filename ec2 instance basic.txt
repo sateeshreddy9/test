@@ -1,0 +1,35 @@
+Main.tf file
+resource "aws_instance" "ec2instance" {
+  ami             = var.ami
+  instance_type   = var.type
+  key_name        = var.key
+  security_groups = [var.group]
+  tags = {
+    Name = "ec2 instance by terraform"
+  }
+}
+
+basic form of creating ec2instance using some variables
+
+Var.tf file 
+variable "ami" {
+  description = "Ami id for Ec2 instance"
+  default     = "ami-0e6329e222e662a52"
+}
+
+variable "type" {
+  description = "type for Ec2 instance"
+  default     = "t2.micro"
+}
+
+variable "key" {
+  description = "keypair for Ec2 instance"
+  default     = "new"
+}
+
+variable "group" {
+  description = "security groups for Ec2 instance"
+  default     = "launch-wizard-4"
+}
+
+using variables to create ec2 instance

@@ -1,0 +1,24 @@
+resource "aws_subnet" "subnet1"{
+  cidr_block = "10.0.0.0/25"
+  vpc_id = aws_vpc.aws_vpc.id
+  availability_zone = "ap-southeast-1a"
+  tags = {
+    Name = "sateeshsubnet1"
+  }
+}
+resource "aws_internet_gateway" "gateway"{
+  vpc_id = aws_vpc.aws_vpc.id
+  tags = {
+    Name = "sateeshgateway"
+  }
+}
+resource "aws_route_table" "route_table"{
+  vpc_id = aws_vpc.aws_vpc.id
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.gateway.id
+}
+  tags = {
+    Name= "sateeshroutetable"
+  }
+}

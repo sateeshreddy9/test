@@ -1,0 +1,42 @@
+variable "ami" {
+  description = "Ami id for Ec2 instance"
+  default     = "ami-0e6329e222e662a52"
+}
+
+variable "type" {
+  description = "type for Ec2 instance"
+  default     = "t2.micro"
+}
+
+variable "key" {
+  description = "keypair for Ec2 instance"
+  default     = "keypairs"
+}
+
+variable "group" {
+  description = "security groups for Ec2 instance"
+  default     = "testsecurity"
+}
+variable "security" {
+  description = "security group"
+  default     = "testsecurity"
+}
+
+variable "vpc" {
+  description = "vpc id"
+  default     = "vpc-013d41d70ccbe6e0f"
+}
+
+variable "proto" {
+  description = "protocall"
+  default     = "tcp"
+}
+variable "name" {
+  description = "name"
+  default     = "testuser"
+}
+
+variable "policy" {
+  description = "iam policy"
+  default     = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
+}

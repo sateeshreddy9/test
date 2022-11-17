@@ -1,0 +1,39 @@
+main.tf
+resource "aws_security_group" "testsecurity" {
+  description = "security group script"
+  name        = var.security
+  vpc_id      = var.vpc
+
+
+
+  ingress {
+    description = "ssh"
+    from_port   = 22
+    to_port     = 22
+    protocol    = var.proto
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    description = "ssh"
+    from_port   = 22
+    to_port     = 22
+    protocol    = var.proto
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+var.tf
+variable "security" {
+  description = "security group"
+  default     = "testsecurity"
+}
+
+variable "vpc" {
+  description = "vpc id"
+  default     = "vpc-013d41d70ccbe6e0f"
+}
+
+variable "proto" {
+  description = "protocall"
+  default     = "tcp"
+}

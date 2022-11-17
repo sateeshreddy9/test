@@ -1,0 +1,17 @@
+#!/bin/sh
+yum install java-1.8.0-openjdk -y
+sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+yum install jenkins -y
+systemctl start jenkins
+wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.65/bin/apache-tomcat-9.0.65.tar.gz
+tar -xvf apache-tomcat-9.0.65.tar.gz
+cd apache-tomcat-9.0.65/
+chmod 777 webapps/
+cd ..
+yum install docker -y
+systemctl start docker
+docker login -u satee9 -p password
+yum install git -y
+yum install maven -y
+cat /var/lib/jenkins/secrets/initialAdminPassword
